@@ -1,0 +1,101 @@
+# Save new user
+POST http://localhost/api/data/users
+accept: application/json
+Content-Type: application/json
+
+{
+  "id": 0,
+  "username": "test2",
+  "password": "somepass"
+}
+
+###
+
+# Get all users without passwords
+GET http://localhost/api/data/users
+accept: application/json
+
+###
+
+# Get user with passwords
+GET http://localhost/api/data/users?projection=full_user
+accept: application/json
+
+###
+###
+###
+###
+###
+
+# Save new post of user 1
+POST http://localhost/api/data/posts
+accept: application/hal+json
+Content-Type: application/json
+
+{
+"title": "somepost",
+"text": "some post with text",
+"author": "http://localhost/api/data/users/1"
+}
+
+###
+
+# get post preview (defaul projection)
+GET http://localhost/api/data/posts
+accept: application/hal+json
+
+###
+
+# get post with all fields
+GET http://localhost/api/data/posts?projection=fullPost
+accept: application/hal+json
+
+###
+
+# Find post by author id
+GET http://localhost/api/data/posts/search/find-by-author?author_id=1&page=0&size=20
+accept: application/hal+json
+
+###
+###
+###
+###
+###
+
+# save new comment to first post by second user
+POST http://localhost/api/data/postComments
+accept: application/hal+json
+Content-Type: application/json
+
+{
+  "text": "this post is bullshit",
+  "post": "http://localhost/api/data/post/1",
+  "author": "http://localhost/api/data/users/2"
+}
+
+###
+
+# save new comment to first post by first user
+POST http://localhost/api/data/postComments
+accept: application/hal+json
+Content-Type: application/json
+
+{
+"text": "yep, it is",
+"post": "http://localhost/api/data/post/1",
+"author": "http://localhost/api/data/users/1"
+}
+
+###
+
+# search all comments of post 1
+
+GET http://localhost/api/data/postComments/search/find-by-post?post_id=1&page=0&size=20
+accept: application/hal+json
+
+###
+
+# get all comments
+
+GET http://localhost/api/data/postComments
+accept: application/hal+json
