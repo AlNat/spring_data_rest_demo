@@ -1,5 +1,6 @@
 package dev.alnat.sdt.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -39,6 +40,7 @@ public class User implements Serializable {
     private String username;
 
     @ToString.Exclude
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // hiding filed
     @Column(updatable = false, nullable = false)
     private String password;
 
